@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by Pravin on 5/3/16.
+
  */
 public class StateArrayAdapter extends ArrayAdapter<State> {
 
