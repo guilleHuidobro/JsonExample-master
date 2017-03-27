@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">JSONExample</string>
+    <string name="web_url">http://67.23.251.165/~jarol/coneccion.php</string>
+</resources>
