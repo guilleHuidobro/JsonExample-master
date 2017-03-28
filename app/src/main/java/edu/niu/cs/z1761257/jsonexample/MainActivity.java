@@ -21,9 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     private List<State> stateList = new ArrayList<>();
     private StateArrayAdapter stateArrayAdapter;
     private ListView stateListView;
+
+    private List<Fixture> fixtureList = new ArrayList<>();
+    private  FixtureArrayAdapter fixtureArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +36,14 @@ public class MainActivity extends AppCompatActivity {
 
         stateListView = (ListView)findViewById(R.id.stateListView);
         stateArrayAdapter = new StateArrayAdapter(this, stateList);
-        stateListView.setAdapter(stateArrayAdapter);
+        fixtureArrayAdapter = new FixtureArrayAdapter(this, fixtureList);
+        //stateListView.setAdapter(stateArrayAdapter);
+        stateListView.setAdapter(fixtureArrayAdapter);
     }//end of onCreate
 
     //Handle the button click
     public void getData(View view){
-    String urlString = getString(R.string.web_url);
+    String urlString = getString(R.string.web_url_fixture);
 
         try{
             URL url = new URL(urlString);
@@ -102,8 +108,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
            // super.onPostExecute(jsonObject);
-            convertJSONtoArrayList(jsonObject);
-            stateArrayAdapter.notifyDataSetChanged();
+            //convertJSONtoArrayList(jsonObject);
+            convertFixtureJSONtoArrayList(jsonObject);
+            //stateArrayAdapter.notifyDataSetChanged();
+            fixtureArrayAdapter.notifyDataSetChanged();
+
             stateListView.smoothScrollToPosition(0);
 
         }//end of onPostExecute
@@ -113,11 +122,30 @@ public class MainActivity extends AppCompatActivity {
 
         stateList.clear();
         try{
-            JSONArray list = states.getJSONArray("equipos");
+            JSONArray list = states.getJSONArray("fixture");
 
             for(int i=0; i<list.length(); i++) {
                 JSONObject stateobj = list.getJSONObject(i);
-                stateList.add(new State(stateobj.getString("nombre")));
+                stateList.add(new State(stateobj.getString("numero_fecha_afa")));
+
+            }//end of for loop
+
+        }catch(JSONException e){
+            e.printStackTrace();
+
+        }//end of catch
+
+    }//end of convertJSONArrayList
+
+    private void convertFixtureJSONtoArrayList(JSONObject states){
+
+        fixtureList.clear();
+        try{
+            JSONArray list = states.getJSONArray("fixture");
+
+            for(int i=0; i<list.length(); i++) {
+                JSONObject stateobj = list.getJSONObject(i);
+                fixtureList.add(new Fixture(stateobj.getString("equipo_local"),stateobj.getString("equipo_visitante")));
 
             }//end of for loop
 
