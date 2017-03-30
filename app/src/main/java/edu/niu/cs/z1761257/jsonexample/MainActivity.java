@@ -1,9 +1,8 @@
 package edu.niu.cs.z1761257.jsonexample;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -14,7 +13,6 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,10 +37,12 @@ public class MainActivity extends AppCompatActivity {
         fixtureArrayAdapter = new FixtureArrayAdapter(this, fixtureList);
         //stateListView.setAdapter(stateArrayAdapter);
         stateListView.setAdapter(fixtureArrayAdapter);
+
+        getData();
     }//end of onCreate
 
     //Handle the button click
-    public void getData(View view){
+    public void getData(){
     String urlString = getString(R.string.web_url_fixture);
 
         try{
