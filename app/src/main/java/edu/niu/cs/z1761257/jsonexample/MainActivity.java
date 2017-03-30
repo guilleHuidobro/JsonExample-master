@@ -20,12 +20,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<State> stateList = new ArrayList<>();
-    private StateArrayAdapter stateArrayAdapter;
     private ListView stateListView;
 
     private List<Fixture> fixtureList = new ArrayList<>();
     private  FixtureArrayAdapter fixtureArrayAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +32,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         stateListView = (ListView)findViewById(R.id.stateListView);
-        stateArrayAdapter = new StateArrayAdapter(this, stateList);
+        //stateArrayAdapter = new StateArrayAdapter(this, stateList);
         fixtureArrayAdapter = new FixtureArrayAdapter(this, fixtureList);
         //stateListView.setAdapter(stateArrayAdapter);
         stateListView.setAdapter(fixtureArrayAdapter);
+/*
+        stateListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Fixture fixture = fixtureArrayAdapter.getItem(position);
+
+                Toast.makeText(getApplicationContext(),
+                        "Iniciar screen de detalle para: \n" + fixture.getEquipoLocal(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+*/
         getData();
     }//end of onCreate
+
+    public void equipoLocal(){
+
+    }
 
     //Handle the button click
     public void getData(){
@@ -55,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }//end of getView
+
 
     private class StateTask extends AsyncTask<URL, String,JSONObject>{
 
@@ -118,24 +134,6 @@ public class MainActivity extends AppCompatActivity {
         }//end of onPostExecute
     }//end of StateTask
 
-    private void convertJSONtoArrayList(JSONObject states){
-
-        stateList.clear();
-        try{
-            JSONArray list = states.getJSONArray("fixture");
-
-            for(int i=0; i<list.length(); i++) {
-                JSONObject stateobj = list.getJSONObject(i);
-                stateList.add(new State(stateobj.getString("numero_fecha_afa")));
-
-            }//end of for loop
-
-        }catch(JSONException e){
-            e.printStackTrace();
-
-        }//end of catch
-
-    }//end of convertJSONArrayList
 
     private void convertFixtureJSONtoArrayList(JSONObject states){
 

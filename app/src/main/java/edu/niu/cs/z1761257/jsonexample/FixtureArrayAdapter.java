@@ -1,6 +1,7 @@
 package edu.niu.cs.z1761257.jsonexample;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +30,9 @@ public class FixtureArrayAdapter extends ArrayAdapter<Fixture> {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_item,parent,false); //false - not to automatically attach for parent
-            viewHolder.stateTV = (TextView)convertView.findViewById(R.id.stateTextView);
-            viewHolder.equipoVisita = (TextView)convertView.findViewById(R.id.stateTextView2);
+            viewHolder.equipoLocal = (TextView)convertView.findViewById(R.id.equipoLocal);
+            viewHolder.equipoVisitante = (TextView)convertView.findViewById(R.id.equipoVisitante);
+            viewHolder.empate = (TextView)convertView.findViewById(R.id.empate);
 
             convertView.setTag(viewHolder);
 
@@ -40,15 +42,52 @@ public class FixtureArrayAdapter extends ArrayAdapter<Fixture> {
 
         }
 
-        viewHolder.stateTV.setText(fixture.equipoLocal);
-        viewHolder.equipoVisita.setText(fixture.equipoVisitante);
+        viewHolder.equipoLocal.setText(fixture.equipoLocal);
+        viewHolder.equipoVisitante.setText(fixture.equipoVisitante);
+
+
+        final TextView equipoLocalTexto = (TextView)convertView.findViewById(R.id.equipoLocal);
+        equipoLocalTexto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                equipoLocalTexto.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPred));
+/*
+                Toast.makeText(getContext(),
+                        "Elegiste al Local: \n" +  equipoLocalTexto.getText(),
+                        Toast.LENGTH_SHORT).show();
+                        */
+
+            }
+        });
+        final TextView equipoVisitanteTexto = (TextView)convertView.findViewById(R.id.equipoVisitante);
+        equipoVisitanteTexto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                equipoVisitanteTexto.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPred));
+
+
+            }
+        });
+        final TextView empateTexto = (TextView)convertView.findViewById(R.id.empate);
+        empateTexto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                empateTexto.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPred));
+
+
+            }
+        });
 
         return convertView;
     }//end of getView
 
     private static class ViewHolder{
-        TextView stateTV;
-        TextView equipoVisita;
+        TextView equipoLocal;
+        TextView equipoVisitante;
+        TextView empate;
 
     }//end of ViewHolder
 
