@@ -1,21 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <Button
+    <TableLayout
+        android:id="@+id/Tabla"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Get Data"
-        android:id="@+id/dataButton"
-        android:onClick="getData"/>
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:id="@+id/stateListView"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+
+        <TableRow
+            android:id="@+id/fechaFixtureRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/fechaFixtureTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_span="3"
+                android:gravity="center"
+                android:text="Campeonato Primera A Fecha # 19 "
+                android:textColor="#000"
+                android:textSize="24sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/SeparadorTotales1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/LineaTotales1"
+                android:layout_width="fill_parent"
+                android:layout_height="5px"
+                android:layout_span="5"
+                android:background="#550055"></FrameLayout>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:padding="5px"
+                android:text="Local"
+                android:textColor="#005500"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5px"
+                android:text="Empate"
+                android:textColor="#005500"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:padding="5px"
+                android:text="Visita"
+                android:textColor="#005500"
+                android:textSize="20sp" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/SeparadorTotales"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/LineaTotales"
+                android:layout_width="fill_parent"
+                android:layout_height="7px"
+                android:layout_span="5"
+                android:background="#550055"></FrameLayout>
+        </TableRow>
+
+        <ListView
+            android:id="@+id/stateListView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </TableLayout>
+
 </LinearLayout>
