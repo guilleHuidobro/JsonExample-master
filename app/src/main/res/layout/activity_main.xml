@@ -94,6 +94,25 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1" />
+
+        <TableRow
+            android:id="@+id/SeparadorTotales3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/LineaTotales3"
+                android:layout_width="fill_parent"
+                android:layout_height="10px"
+                android:layout_span="5"
+                android:background="#550055"></FrameLayout>
+
+        </TableRow>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enviar" />
     </TableLayout>
 
 </LinearLayout>

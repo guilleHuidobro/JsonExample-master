@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Fixture> fixtureList = new ArrayList<>();
     private  FixtureArrayAdapter fixtureArrayAdapter;
-
+    Integer partido = null;
+    String prueba = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +42,13 @@ public class MainActivity extends AppCompatActivity {
         //stateListView.setAdapter(stateArrayAdapter);
         stateListView.setAdapter(fixtureArrayAdapter);
 
+
+
         stateListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                fixtureArrayAdapter.getItem(position);
+                partido = position + 1;
 
                 final TextView equipoLocal = (TextView)view.findViewById(R.id.equipoLocal);
                 final TextView equipoVisitante = (TextView)view.findViewById(R.id.equipoVisitante);
@@ -58,9 +61,13 @@ public class MainActivity extends AppCompatActivity {
                         equipoLocal.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPred));
                         equipoVisitante.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
                         empate.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
-                        Toast.makeText(getApplicationContext(),
-                                "Iniciar screen de detalle para: \n" + equipoLocal.getText(),
+
+                        prueba = String.valueOf(partido) + " " + equipoLocal.getText()+ " " + "1";
+
+                        comprobarPrediccion(position,prueba);
+                        Toast.makeText(getApplicationContext(),prueba,
                                 Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 equipoVisitante.setOnClickListener(new View.OnClickListener() {
@@ -69,9 +76,13 @@ public class MainActivity extends AppCompatActivity {
                         equipoLocal.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
                         equipoVisitante.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPred));
                         empate.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
-                        Toast.makeText(getApplicationContext(),
-                                "Iniciar screen de detalle para: \n" + equipoVisitante.getText(),
+
+                        prueba = String.valueOf(partido) + " " + equipoVisitante.getText()+ " " + "1";
+
+                        comprobarPrediccion(position,prueba);
+                        Toast.makeText(getApplicationContext(),prueba,
                                 Toast.LENGTH_SHORT).show();
+
                     }
                 });
                 empate.setOnClickListener(new View.OnClickListener() {
@@ -80,19 +91,48 @@ public class MainActivity extends AppCompatActivity {
                         equipoLocal.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
                         equipoVisitante.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
                         empate.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPred));
-                        Toast.makeText(getApplicationContext(),
-                                "Iniciar screen de detalle para: \n" + empate.getText(),
+
+                        prueba = String.valueOf(partido) + " " + empate.getText()+ " " + "1";
+
+                        comprobarPrediccion(position,prueba);
+                        Toast.makeText(getApplicationContext(),prueba,
                                 Toast.LENGTH_SHORT).show();
+
                     }
                 });
-
-
 
             }
         });
 
         getData();
     }//end of onCreate
+
+
+
+    List<String> predList = new ArrayList<String>();
+    List<Integer> posiciones = new ArrayList<Integer>();
+    public void comprobarPrediccion(int posicion,String pred){
+
+        if(!posiciones.contains(posicion)){
+            posiciones.add(posicion);
+        }else{
+            posiciones.remove(posicion);
+            posiciones.add(posicion);
+        }
+
+        if (posiciones.size() < 10){
+            predList.add(pred);
+        }
+
+    }
+
+    /*
+    *
+    *                         Toast.makeText(getApplicationContext(),
+                                "Iniciar screen de detalle para: \n" + empate.getText(),
+                                Toast.LENGTH_SHORT).show();
+    *
+    * */
 
     //Handle the button click
     public void getData(){
