@@ -1,7 +1,6 @@
 package edu.niu.cs.z1761257.jsonexample;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,42 +43,6 @@ public class FixtureArrayAdapter extends ArrayAdapter<Fixture> {
 
         viewHolder.equipoLocal.setText(fixture.equipoLocal);
         viewHolder.equipoVisitante.setText(fixture.equipoVisitante);
-
-
-        final TextView equipoLocalTexto = (TextView)convertView.findViewById(R.id.equipoLocal);
-        equipoLocalTexto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                equipoLocalTexto.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPred));
-/*
-                Toast.makeText(getContext(),
-                        "Elegiste al Local: \n" +  equipoLocalTexto.getText(),
-                        Toast.LENGTH_SHORT).show();
-                        */
-
-            }
-        });
-        final TextView equipoVisitanteTexto = (TextView)convertView.findViewById(R.id.equipoVisitante);
-        equipoVisitanteTexto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                equipoVisitanteTexto.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPred));
-
-
-            }
-        });
-        final TextView empateTexto = (TextView)convertView.findViewById(R.id.empate);
-        empateTexto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                empateTexto.setTextColor(ContextCompat.getColor(getContext(), R.color.colorPred));
-
-
-            }
-        });
 
         return convertView;
     }//end of getView

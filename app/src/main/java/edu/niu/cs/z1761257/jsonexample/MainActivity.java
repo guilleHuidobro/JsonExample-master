@@ -2,8 +2,12 @@ package edu.niu.cs.z1761257.jsonexample;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -36,25 +40,59 @@ public class MainActivity extends AppCompatActivity {
         fixtureArrayAdapter = new FixtureArrayAdapter(this, fixtureList);
         //stateListView.setAdapter(stateArrayAdapter);
         stateListView.setAdapter(fixtureArrayAdapter);
-/*
+
         stateListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Fixture fixture = fixtureArrayAdapter.getItem(position);
+                fixtureArrayAdapter.getItem(position);
 
-                Toast.makeText(getApplicationContext(),
-                        "Iniciar screen de detalle para: \n" + fixture.getEquipoLocal(),
-                        Toast.LENGTH_SHORT).show();
+                final TextView equipoLocal = (TextView)view.findViewById(R.id.equipoLocal);
+                final TextView equipoVisitante = (TextView)view.findViewById(R.id.equipoVisitante);
+                final TextView empate = (TextView)view.findViewById(R.id.empate);
+
+                equipoLocal.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        equipoLocal.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPred));
+                        equipoVisitante.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
+                        empate.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
+                        Toast.makeText(getApplicationContext(),
+                                "Iniciar screen de detalle para: \n" + equipoLocal.getText(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                equipoVisitante.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        equipoLocal.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
+                        equipoVisitante.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPred));
+                        empate.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
+                        Toast.makeText(getApplicationContext(),
+                                "Iniciar screen de detalle para: \n" + equipoVisitante.getText(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                empate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        equipoLocal.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
+                        equipoVisitante.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.textColorEquipos));
+                        empate.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorPred));
+                        Toast.makeText(getApplicationContext(),
+                                "Iniciar screen de detalle para: \n" + empate.getText(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
             }
         });
-*/
+
         getData();
     }//end of onCreate
-
-    public void equipoLocal(){
-
-    }
 
     //Handle the button click
     public void getData(){

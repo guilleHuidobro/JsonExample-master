@@ -19,9 +19,7 @@
             android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
             android:textColor="#333"
-            android:textSize="20sp"
-            android:clickable="true"
-            android:onClick="equipoLocal"/>
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/empate"
